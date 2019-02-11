@@ -5,19 +5,19 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kimagemapeditor
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kimagemapeditor-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kimagemapeditor-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kimagemapeditor-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kimagemapeditor-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kimagemapeditor-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kimagemapeditor-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: kimagemapeditor-bin
-Requires: kimagemapeditor-lib
-Requires: kimagemapeditor-data
-Requires: kimagemapeditor-license
-Requires: kimagemapeditor-locales
+Requires: kimagemapeditor-bin = %{version}-%{release}
+Requires: kimagemapeditor-data = %{version}-%{release}
+Requires: kimagemapeditor-lib = %{version}-%{release}
+Requires: kimagemapeditor-license = %{version}-%{release}
+Requires: kimagemapeditor-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : khtml-dev
@@ -32,8 +32,8 @@ Jan SchÃ¤fer
 %package bin
 Summary: bin components for the kimagemapeditor package.
 Group: Binaries
-Requires: kimagemapeditor-data
-Requires: kimagemapeditor-license
+Requires: kimagemapeditor-data = %{version}-%{release}
+Requires: kimagemapeditor-license = %{version}-%{release}
 
 %description bin
 bin components for the kimagemapeditor package.
@@ -58,8 +58,8 @@ doc components for the kimagemapeditor package.
 %package lib
 Summary: lib components for the kimagemapeditor package.
 Group: Libraries
-Requires: kimagemapeditor-data
-Requires: kimagemapeditor-license
+Requires: kimagemapeditor-data = %{version}-%{release}
+Requires: kimagemapeditor-license = %{version}-%{release}
 
 %description lib
 lib components for the kimagemapeditor package.
@@ -82,25 +82,25 @@ locales components for the kimagemapeditor package.
 
 
 %prep
-%setup -q -n kimagemapeditor-18.08.0
+%setup -q -n kimagemapeditor-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535429637
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549868066
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535429637
+export SOURCE_DATE_EPOCH=1549868066
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kimagemapeditor
-cp COPYING %{buildroot}/usr/share/doc/kimagemapeditor/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/kimagemapeditor
+cp COPYING %{buildroot}/usr/share/package-licenses/kimagemapeditor/COPYING
 pushd clr-build
 %make_install
 popd
@@ -116,6 +116,7 @@ popd
 %files data
 %defattr(-,root,root,-)
 /usr/share/applications/org.kde.kimagemapeditor.desktop
+/usr/share/icons/hicolor/128x128/apps/kimagemapeditor.png
 /usr/share/icons/hicolor/16x16/apps/kimagemapeditor.png
 /usr/share/icons/hicolor/22x22/actions/addpoint.png
 /usr/share/icons/hicolor/22x22/actions/arrow.png
@@ -127,8 +128,11 @@ popd
 /usr/share/icons/hicolor/22x22/actions/raise.png
 /usr/share/icons/hicolor/22x22/actions/rectangle.png
 /usr/share/icons/hicolor/22x22/actions/removepoint.png
+/usr/share/icons/hicolor/22x22/apps/kimagemapeditor.png
 /usr/share/icons/hicolor/32x32/apps/kimagemapeditor.png
 /usr/share/icons/hicolor/48x48/apps/kimagemapeditor.png
+/usr/share/icons/hicolor/64x64/apps/kimagemapeditor.png
+/usr/share/icons/hicolor/scalable/apps/kimagemapeditor.svgz
 /usr/share/kimagemapeditor/addpointcursor.png
 /usr/share/kimagemapeditor/freehandcursor.png
 /usr/share/kimagemapeditor/polygoncursor.png
@@ -180,8 +184,8 @@ popd
 /usr/lib64/qt5/plugins/kimagemapeditor.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kimagemapeditor/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kimagemapeditor/COPYING
 
 %files locales -f kimagemapeditor.lang
 %defattr(-,root,root,-)
