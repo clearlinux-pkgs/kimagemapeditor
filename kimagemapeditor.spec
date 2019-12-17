@@ -6,7 +6,7 @@
 #
 Name     : kimagemapeditor
 Version  : 19.12.0
-Release  : 17
+Release  : 18
 URL      : https://download.kde.org/stable/release-service/19.12.0/src/kimagemapeditor-19.12.0.tar.xz
 Source0  : https://download.kde.org/stable/release-service/19.12.0/src/kimagemapeditor-19.12.0.tar.xz
 Source1  : https://download.kde.org/stable/release-service/19.12.0/src/kimagemapeditor-19.12.0.tar.xz.sig
@@ -20,6 +20,8 @@ Requires: kimagemapeditor-license = %{version}-%{release}
 Requires: kimagemapeditor-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : khtml-dev
+BuildRequires : kjs-dev
 BuildRequires : qtwebengine-dev
 
 %description
@@ -89,7 +91,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576556230
+export SOURCE_DATE_EPOCH=1576556583
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -106,7 +108,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576556230
+export SOURCE_DATE_EPOCH=1576556583
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kimagemapeditor
 cp %{_builddir}/kimagemapeditor-19.12.0/COPYING %{buildroot}/usr/share/package-licenses/kimagemapeditor/2d69f4c601571117df29fd61c2ce9117b0879da7
